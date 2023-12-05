@@ -1,4 +1,6 @@
 #include <iostream>
+#include <algorithm>
+#include <random>
 
 using std::cout;
 using std::cin;
@@ -56,9 +58,10 @@ class BST
 {
 private:
     struct Node {
-        int data;
+        int key;
         Node* left = nullptr;
         Node* right = nullptr;
+        Node(int key): key{key} {}
     } *root = nullptr;
 public:
     BST(/* args */);
@@ -76,6 +79,8 @@ BST::~BST()
 
 int main(int argc, char const *argv[])
 {
-    /* code */
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdin);
+
     return 0;
 }
