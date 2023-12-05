@@ -40,6 +40,8 @@ private:
     static void split(Node* n, int key, Node *&a, Node*&b) {
     
         if(!n) {
+            // если дерево пусто, то и результатом его деления будут 2 пустых
+            // дерева. Делаем всё null ptr и возвращаемся
             a = b = nullptr;
             return;
         }
