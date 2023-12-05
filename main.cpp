@@ -10,12 +10,12 @@ using std::endl;
 
 static std::minstd_rand generator;
 
-struct Node {
+typedef struct Node {
     int key, priority;
     Node* left = nullptr;
     Node* right = nullptr;
-    Node(int key): key{key}, priority{generator()} {}
-}
+    Node(int key): key{key}, priority(generator()) {}
+} Node;
 
 class CartessianTree
 {
@@ -38,8 +38,7 @@ private:
     }
     // разрезание деревьев по ключу
     static void split(Node* n, int key, Node *&a, Node*&b) {
-    CartessianTree(/* args */) : root {nullptr}{}
-    ~CartessianTree(){}
+    
         if(!n) {
             a = b = nullptr;
             return;
@@ -72,12 +71,12 @@ private:
         }
     }
 public:
+    CartessianTree(/* args */) : root {nullptr}{}
+    ~CartessianTree(){}
 
     void min();
     void max();
 };
-
-std::minstd_rand generator;
 
 int main(int argc, char const *argv[])
 {
