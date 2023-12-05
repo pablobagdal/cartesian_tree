@@ -7,75 +7,77 @@ using std::cin;
 using std::endl;
 
 // treap - tree + heap
+
+static std::minstd_rand generator;
+
+struct Node {
+    int key, priority;
+    Node* left = nullptr;
+    Node* right = nullptr;
+    Node(int key): key{key}, priority{generator()} {}
+}
+
 class CartessianTree
 {
 private:
-    /* data */
-    void successor();
+    Node *root;
+    // void successor();
+    // объединение деревьев
+    static Node* merge(Node* a, Node* b) 
+    {
+        if(!a || !b) {
+            return a ? a : b;
+        }
+        if(a->priority > b->priority) {
+            a->right = merge(a->right, b);
+            return a;
+        } else {
+            b->left = merge(a, b->left);
+            return b;
+        }
+    }
+    // разрезание деревьев по ключу
+    static void split(Node* n, int key, Node *&a, Node*&b) {
+    CartessianTree(/* args */) : root {nullptr}{}
+    ~CartessianTree(){}
+        if(!n) {
+            a = b = nullptr;
+            return;
+        }
+
+        if(n->key < key) {
+            /*
+                 n
+            [n->left]  [n->right ]
+            */
+            // теперь правый должен дробиться
+            /*
+                    a=n
+            [n->left]  [n->right = a', b = b']
+            */
+           split(n->right, key, n->right, b);
+           a = n;
+        } else {
+            /*
+                     n
+            [n->left]  [n->right ]
+            */
+            // теперь левый должен дробиться
+            /*
+                b=n
+            [a=a', n->left=b']  [n->right]
+            */
+           split(n->left, key, a, n->left);
+           n = b;
+        }
+    }
 public:
-    CartessianTree(/* args */);
-    ~CartessianTree();
-    void merge(); // объединение деревьев
-    void split(); // разрезание деревьев по ключу
+
     void min();
     void max();
 };
 
-CartessianTree::CartessianTree(/* args */)
-{
-}
-
-CartessianTree::~CartessianTree()
-{
-}
-
-void CartessianTree::merge()
-{
-    
-}
-
-void CartessianTree::split()
-{
-
-}
-
-void CartessianTree::successor()
-{
-
-}
-
-void min()
-{
-
-}
-
-void max()
-{
-
-}
-
-class BST
-{
-private:
-    struct Node {
-        int key;
-        Node* left = nullptr;
-        Node* right = nullptr;
-        Node(int key): key{key} {}
-    } *root = nullptr;
-public:
-    BST(/* args */);
-    ~BST();
-};
-
-BST::BST(/* args */)
-{
-}
-
-BST::~BST()
-{
-}
-
+std::minstd_rand generator;
 
 int main(int argc, char const *argv[])
 {
